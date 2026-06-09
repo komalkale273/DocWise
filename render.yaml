@@ -4,10 +4,8 @@ services:
     env: python
     plan: free
     buildCommand: "pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput"
-    startCommand: "gunicorn docwise.wsgi:application"
+    startCommand: "gunicorn docwise.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
-      - key: PORT
-        value: "8000"
       - key: DEBUG
         value: "False"
       - key: SECRET_KEY
