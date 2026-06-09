@@ -152,8 +152,8 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = BASE_DIR / 'static'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# WhiteNoise: Compress and cache static files for production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# WhiteNoise: Compress static files without renaming (prevents breaking JS/CSS library internal references)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
