@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: docwise
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python backend/docwise/manage.py migrate --noinput && python backend/docwise/manage.py collectstatic --noinput"
+    startCommand: "gunicorn backend.docwise.docwise.wsgi:application"
+    envVars:
+      - key: PORT
+        value: "8000"
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DB_NAME
+        value: "neondb"
+      - key: DB_USER
+        value: "neondb_owner"
+      - key: DB_PASSWORD
+        sync: false  # You will enter this in Render dashboard (sensitive)
+      - key: DB_HOST
+        value: "ep-blue-cloud-aqcv54qe-pooler.c-8.us-east-1.aws.neon.tech"
+      - key: DB_PORT
+        value: "5432"
+      - key: EMAIL_HOST_USER
+        value: "komalkale157@gmail.com"
+      - key: EMAIL_HOST_PASSWORD
+        sync: false  # You will enter this in Render dashboard (sensitive)
