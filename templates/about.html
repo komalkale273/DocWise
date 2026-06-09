@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .team-card {
+    transition: all 0.3s ease-in-out;
+    border-radius: 15px;
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+  }
+  .team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 176, 116, 0.15) !important;
+    border-color: #00B074;
+  }
+  .guide-card {
+    transition: all 0.3s ease-in-out;
+    border-radius: 15px;
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-top: 5px solid #00B074 !important;
+  }
+  .guide-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(43, 57, 64, 0.15) !important;
+    border-color: #2B3940;
+  }
+  .circle-avatar {
+    width: 80px;
+    height: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    background-color: #e8f7f2;
+    color: #00B074;
+    transition: all 0.3s ease;
+  }
+  .team-card:hover .circle-avatar {
+    background-color: #00B074;
+    color: #ffffff;
+  }
+  .guide-avatar {
+    width: 90px;
+    height: 90px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    background-color: #e9ecef;
+    color: #2B3940;
+    transition: all 0.3s ease;
+  }
+  .guide-card:hover .guide-avatar {
+    background-color: #2B3940;
+    color: #ffffff;
+  }
+</style>
+
+<!-- Header Start -->
+<div class="container-xxl py-3 bg-dark page-header mb-5">
+  <div class="container my-2 pt-2 pb-2">
+    {% if user.is_authenticated %}
+      {% if user.userprofile.preferred_language == 'hi' %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">हमारे बारे में</h1>
+      {% elif user.userprofile.preferred_language == 'mr' %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">आमच्याबद्दल</h1>
+      {% else %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">About Us</h1>
+      {% endif %}
+    {% else %}
+      <h1 class="display-3 text-white mb-3 animated slideInDown">About Us</h1>
+    {% endif %}
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb text-uppercase">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item text-white active">About</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!-- Header End -->
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+      {% if user.is_authenticated %}
+        {% if user.userprofile.preferred_language == 'hi' %}
+          <h1 class="mb-3">परियोजना टीम और मार्गदर्शक</h1>
+          <p>DocWise की विकास और निर्देशन टीम जो भारत के नागरिकों को डिजिटल मार्गदर्शन प्रदान करने के लिए प्रयासरत है।</p>
+        {% elif user.userprofile.preferred_language == 'mr' %}
+          <h1 class="mb-3">प्रकल्प संघ आणि मार्गदर्शक</h1>
+          <p>DocWise चे विकासक आणि मार्गदर्शक जे भारतीय नागरिकांना सुलभ मार्गदर्शन देण्यासाठी कटिबद्ध आहेत.</p>
+        {% else %}
+          <h1 class="mb-3">Project Guide & Team</h1>
+          <p>Meet the visionary minds and mentors behind DocWise, working to simplify government schemes and documentation for every citizen.</p>
+        {% endif %}
+      {% else %}
+        <h1 class="mb-3">Project Guide & Team</h1>
+        <p>Meet the visionary minds and mentors behind DocWise, working to simplify government schemes and documentation for every citizen.</p>
+      {% endif %}
+    </div>
+
+    <!-- Project Guide Row -->
+    <div class="row g-4 justify-content-center mb-5">
+      <div class="col-lg-6 col-md-8 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="card guide-card border shadow-sm p-4 text-center h-100">
+          <div class="guide-avatar shadow-sm mx-auto">
+            <i class="fas fa-graduation-cap fa-2x"></i>
+          </div>
+          <span class="badge bg-primary px-3 py-2 align-self-center rounded-pill mb-3 text-uppercase">Project Guide</span>
+          <h3 class="mb-1 text-dark font-weight-bold">Archana Bhade</h3>
+          <h5 class="text-secondary mb-3">Head Of Information Technology Department</h5>
+          <p class="text-muted mb-0">
+            <i class="fas fa-university me-2 text-primary"></i>Government College of Engineering, Amravati
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Developers Row -->
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 text-center my-4 wow fadeInUp" data-wow-delay="0.1s">
+        <h3 class="font-weight-bold text-dark">Developers of Idea</h3>
+        <hr class="mx-auto bg-primary" style="width: 80px; height: 3px; border: none; opacity: 1;">
+      </div>
+
+      <!-- Team Lead: Pranay -->
+      <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="card team-card border shadow-sm p-4 text-center h-100">
+          <div class="circle-avatar shadow-sm mx-auto">
+            <i class="fas fa-laptop-code fa-2x"></i>
+          </div>
+          <span class="badge bg-success px-3 py-1.5 align-self-center rounded-pill mb-3">Team Lead</span>
+          <h4 class="mb-1 text-dark font-weight-bold">Pranay Chandrikapure</h4>
+          <p class="text-muted small mb-1">(21007016)</p>
+          <h6 class="text-primary mb-3">Django Developer</h6>
+          <p class="text-muted small mb-0 mt-auto">
+            <i class="fas fa-graduation-cap me-1"></i>Final Year, IT Dept.<br>Government College of Engineering, Amravati
+          </p>
+        </div>
+      </div>
+
+      <!-- Team Member: Komal -->
+      <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+        <div class="card team-card border shadow-sm p-4 text-center h-100">
+          <div class="circle-avatar shadow-sm mx-auto">
+            <i class="fas fa-code fa-2x"></i>
+          </div>
+          <span class="badge bg-secondary px-3 py-1.5 align-self-center rounded-pill mb-3">Team Member</span>
+          <h4 class="mb-1 text-dark font-weight-bold">Komal Kale</h4>
+          <p class="text-muted small mb-1">(21007011)</p>
+          <h6 class="text-primary mb-3">Django Developer</h6>
+          <p class="text-muted small mb-0 mt-auto">
+            <i class="fas fa-graduation-cap me-1"></i>Final Year, IT Dept.<br>Government College of Engineering, Amravati
+          </p>
+        </div>
+      </div>
+
+      <!-- Team Member: Kabir -->
+      <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+        <div class="card team-card border shadow-sm p-4 text-center h-100">
+          <div class="circle-avatar shadow-sm mx-auto">
+            <i class="fas fa-paint-brush fa-2x"></i>
+          </div>
+          <span class="badge bg-secondary px-3 py-1.5 align-self-center rounded-pill mb-3">Team Member</span>
+          <h4 class="mb-1 text-dark font-weight-bold">Kabir Phakale</h4>
+          <p class="text-muted small mb-1">(21007019)</p>
+          <h6 class="text-primary mb-3">UI and UX Designer</h6>
+          <p class="text-muted small mb-0 mt-auto">
+            <i class="fas fa-graduation-cap me-1"></i>Final Year, IT Dept.<br>Government College of Engineering, Amravati
+          </p>
+        </div>
+      </div>
+
+      <!-- Team Member: Anuja -->
+      <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+        <div class="card team-card border shadow-sm p-4 text-center h-100">
+          <div class="circle-avatar shadow-sm mx-auto">
+            <i class="fas fa-brain fa-2x"></i>
+          </div>
+          <span class="badge bg-secondary px-3 py-1.5 align-self-center rounded-pill mb-3">Team Member</span>
+          <h4 class="mb-1 text-dark font-weight-bold">Anuja Bhele</h4>
+          <p class="text-muted small mb-1">(21007021)</p>
+          <h6 class="text-primary mb-3">Info & Idea Brainstormer</h6>
+          <p class="text-muted small mb-0 mt-auto">
+            <i class="fas fa-graduation-cap me-1"></i>Final Year, IT Dept.<br>Government College of Engineering, Amravati
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- About End -->
+{% endblock %}

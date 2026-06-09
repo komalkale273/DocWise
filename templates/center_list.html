@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Header Start -->
+<div class="container-xxl py-3 bg-dark page-header">
+  <div class="container my-2 pt-2 pb-2">
+    {% if user.is_authenticated %}
+      {% if user.userprofile.preferred_language == 'hi' %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">सेवा केंद्र</h1>
+      {% elif user.userprofile.preferred_language == 'mr' %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">सेवा केंद्र</h1>
+      {% else %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Service Centers</h1>
+      {% endif %}
+    {% else %}
+      <h1 class="display-3 text-white mb-3 animated slideInDown">Service Centers</h1>
+    {% endif %}
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb text-uppercase">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item text-white active">Service Centers</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!-- Header End -->
+
+<!-- Search Start -->
+<form method="get">
+  <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+    <div class="container">
+      <div class="row g-2">
+        <div class="col-md-10">
+          <div class="row g-2">
+            <div class="col-md-3">
+              <input type="text" class="form-control border-0 py-3" name="state" value="{{ state }}" placeholder="State (e.g. Maharashtra)" />
+            </div>
+            <div class="col-md-3">
+              <input type="text" class="form-control border-0 py-3" name="city" value="{{ city }}" placeholder="City (e.g. Thane)" />
+            </div>
+            <div class="col-md-3">
+              <select class="form-select border-0 py-3" name="type">
+                <option value="">Center Type</option>
+                <option value="csc" {% if center_type == 'csc' %}selected{% endif %}>Common Service Center (CSC)</option>
+                <option value="rto" {% if center_type == 'rto' %}selected{% endif %}>RTO Office</option>
+                <option value="municipal" {% if center_type == 'municipal' %}selected{% endif %}>Municipal Corporation</option>
+                <option value="post_office" {% if center_type == 'post_office' %}selected{% endif %}>Post Office</option>
+                <option value="cyber_cafe" {% if center_type == 'cyber_cafe' %}selected{% endif %}>Cyber Café</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <input type="text" class="form-control border-0 py-3" name="search" value="{{ search_query }}" placeholder="Keyword Search" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-dark border-0 w-100 py-3">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- Search End -->
+
+<!-- Centers Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+      <div class="tab-content">
+        <div class="tab-pane fade show p-0 active">
+          {% if centers %}
+            {% for center in centers %}
+              <div class="job-item p-4 mb-4 text-start border rounded shadow-sm bg-white">
+                <div class="row g-4 align-items-center">
+                  <div class="col-sm-12 col-md-8 d-flex align-items-start">
+                    <div class="bg-light rounded p-3 me-4 text-center d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; min-width: 70px;">
+                      {% if center.center_type == 'csc' %}
+                        <i class="fas fa-laptop-house text-primary fa-2x"></i>
+                      {% elif center.center_type == 'rto' %}
+                        <i class="fas fa-car text-primary fa-2x"></i>
+                      {% elif center.center_type == 'municipal' %}
+                        <i class="fas fa-university text-primary fa-2x"></i>
+                      {% elif center.center_type == 'post_office' %}
+                        <i class="fas fa-envelope-open-text text-primary fa-2x"></i>
+                      {% else %}
+                        <i class="fas fa-map-marker-alt text-primary fa-2x"></i>
+                      {% endif %}
+                    </div>
+                    <div>
+                      <h5 class="mb-2 text-primary font-weight-bold">{{ center.name }}</h5>
+                      <p class="mb-2 text-muted"><i class="fas fa-map-marker-alt text-primary me-2"></i>{{ center.address }}, {{ center.city }}, {{ center.state }} - {{ center.pin_code }}</p>
+                      <p class="mb-0 text-dark"><i class="fas fa-tools text-primary me-2"></i><strong>Services Offered:</strong> {{ center.services_offered }}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="mb-3 text-md-right">
+                      {% if center.contact_number %}
+                        <p class="mb-1 text-muted"><i class="fas fa-phone-alt text-primary me-2"></i>{{ center.contact_number }}</p>
+                      {% endif %}
+                      <p class="mb-0 text-muted"><i class="far fa-clock text-primary me-2"></i>{{ center.timings }}</p>
+                    </div>
+                    <a class="btn btn-primary px-4 py-2" href="https://www.google.com/maps/search/?api=1&query={{ center.name|urlencode }}+{{ center.city|urlencode }}+{{ center.state|urlencode }}" target="_blank">
+                      Get Directions <i class="fas fa-directions ms-2"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="text-center py-5 border rounded bg-white shadow-sm">
+              <i class="fas fa-search-minus text-muted fa-4x mb-3"></i>
+              <h3 class="text-muted">No Service Centers Found</h3>
+              <p class="text-muted">Try expanding your search query or entering a different location.</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Centers End -->
+
+{% endblock %}

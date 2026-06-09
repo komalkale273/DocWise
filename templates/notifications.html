@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Header Start -->
+<div class="container-xxl py-3 bg-dark page-header">
+  <div class="container my-2 pt-2 pb-2">
+    {% if selected_lang == 'hi' %}
+      <h1 class="display-3 text-white mb-3 animated slideInDown">सूचनाएं</h1>
+    {% elif selected_lang == 'mr' %}
+      <h1 class="display-3 text-white mb-3 animated slideInDown">सूचना</h1>
+    {% else %}
+      <h1 class="display-3 text-white mb-3 animated slideInDown">Notification Center</h1>
+    {% endif %}
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb text-uppercase">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item text-white active">Notifications</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!-- Header End -->
+
+<!-- Notifications Start -->
+<div class="container-xxl py-5">
+  <div class="container" style="max-width: 800px;">
+    <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-2">
+      <h4 class="m-0 text-primary font-weight-bold"><i class="fas fa-bell me-2"></i>Recent Alerts</h4>
+    </div>
+    
+    {% if notifications %}
+      {% for notification in notifications %}
+        <div class="card p-4 mb-3 border rounded shadow-sm {% if not notification.is_read %}bg-light-blue{% endif %}" style="border-left: 5px solid {% if notification.type == 'deadline' %}#dc3545{% else %}#0d6efd{% endif %} !important;">
+          <div class="d-flex align-items-start justify-content-between flex-wrap flex-md-nowrap">
+            <div class="d-flex align-items-start">
+              <div class="rounded-circle p-2 me-3 d-flex align-items-center justify-content-center {% if notification.type == 'deadline' %}bg-danger-light text-danger{% else %}bg-primary-light text-primary{% endif %}" style="width: 45px; height: 45px; min-width: 45px;">
+                {% if notification.type == 'deadline' %}
+                  <i class="fas fa-exclamation-triangle fa-lg"></i>
+                {% else %}
+                  <i class="fas fa-bullhorn fa-lg"></i>
+                {% endif %}
+              </div>
+              <div>
+                <h5 class="mb-2 text-dark font-weight-bold">{{ notification.message }}</h5>
+                <p class="mb-2 text-muted" style="font-size: 0.9rem;">
+                  <i class="far fa-calendar-alt me-1 text-primary"></i>Related Scheme: <strong class="text-primary">{{ notification.scheme.title_en }}</strong>
+                </p>
+                <span class="badge {% if notification.type == 'deadline' %}bg-danger{% else %}bg-primary{% endif %} text-uppercase text-xs" style="font-size: 0.7rem; padding: 5px 10px;">
+                  {{ notification.type }}
+                </span>
+              </div>
+            </div>
+            <span class="text-muted text-xs ms-md-3 mt-2 mt-md-0" style="font-size: 0.8rem; min-width: 100px; text-align: right;">
+              <i class="far fa-clock me-1"></i>{{ notification.created_at|timesince }} ago
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="text-center py-5 border rounded bg-white shadow-sm">
+        <i class="far fa-bell-slash text-muted fa-4x mb-3"></i>
+        <h4 class="text-muted">No Notifications Yet</h4>
+        <p class="text-muted mb-0">We will notify you when new schemes matching your profile are launched, or when deadlines are approaching.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+<!-- Notifications End -->
+
+<style>
+  .bg-light-blue {
+    background-color: #f3f8fe !important;
+  }
+  .bg-danger-light {
+    background-color: #fdf2f2;
+  }
+  .bg-primary-light {
+    background-color: #eff6ff;
+  }
+</style>
+
+{% endblock %}

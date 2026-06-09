@@ -1,0 +1,250 @@
+{% extends 'base.html' %} {% block content %}
+
+
+
+        <!-- Header End -->
+        <div class="container-xxl py-3 bg-dark page-header mb-4">
+          <div class="container my-2 pt-2 pb-2">
+            {% if user.is_authenticated %}
+                 {% if user.userprofile.preferred_language == 'hi' %}
+                 <h1 class="display-3 text-white mb-3 animated slideInDown">दस्तावेज़ विवरण</h1>
+                 <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb text-uppercase">
+                         <li class="breadcrumb-item"><a href="#">मुखपृष्ठ</a></li>
+                         <li class="breadcrumb-item text-white active" aria-current="page">कागदपत्रांचे तपशील</li>
+                     </ol>
+                 </nav>
+                 {% elif user.userprofile.preferred_language == 'mr' %}
+              <h1 class="display-3 text-white mb-3 animated slideInDown">कागदपत्रांचे तपशील</h1>
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb text-uppercase">
+                      <li class="breadcrumb-item"><a href="#">मुखपृष्ठ</a></li>
+                      <li class="breadcrumb-item text-white active" aria-current="page">कागदपत्रांचे तपशील</li>
+                  </ol>
+              </nav>
+              {% else %}
+              <h1 class="display-3 text-white mb-3 animated slideInDown">Documents Detail</h1>
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb text-uppercase">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item text-white active" aria-current="page">Documents Detail</li>
+                  </ol>
+              </nav>
+              {% endif %}
+              {% else %}
+              <h1 class="display-3 text-white mb-3 animated slideInDown">Documents Detail</h1>
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb text-uppercase">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item text-white active" aria-current="page">Documents Detail</li>
+                  </ol>
+              </nav>
+              {% endif %}
+
+          </div>
+      </div>
+      <!-- Header End -->
+
+        <!-- Job Detail Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="container">
+              <div class="row gy-5 gx-4">
+                  <div class="col-lg-8">
+                      <div class="d-flex align-items-center mb-5">
+                          <img class="flex-shrink-0 img-fluid border rounded" src="" alt="" style="width: 80px; height: 80px;">
+                          <div class="text-start ps-4">
+                              <h3 class="mb-3">{{document.title}}</h3>
+                          </div>
+                      </div>
+
+                      <div class="mb-5">
+                        {% if user.is_authenticated %}
+                            {% if user.userprofile.preferred_language == 'hi' %}
+                            <h4 class="mb-3">कागदपत्रांचे विवरण</h4>
+                            {% elif user.userprofile.preferred_language == 'mr' %}
+                            <h4 class="mb-3">कागदपत्रांचे वर्णन</h4>
+                            {% else %}
+                            <h4 class="mb-3">Scheme description</h4>
+                            {% endif %}
+                            {% else %}
+                            <h4 class="mb-3">Scheme description</h4>
+                            {% endif %}
+                          <p>{{document.description}}</p>
+                          {% if user.is_authenticated %}
+                                {% if user.userprofile.preferred_language == 'hi' %}
+                                <h4 class="mb-3">कैसे आवेदन करें</h4>
+                                {% elif user.userprofile.preferred_language == 'mr' %}
+                                <h4 class="mb-3">अर्ज कसा करावा</h4>
+                                {% else %}
+                                <h4 class="mb-3">How to apply</h4>
+                                {% endif %}
+                                {% else %}
+                                <h4 class="mb-3">How to apply</h4>
+                                {% endif %}
+                          <p>How to apply</p>
+                          <ul class="list-unstyled">
+                                {% if document.how_to_get_document %}
+                                        <li>
+                                            {{ document.how_to_get_document }}
+                                        </li>
+                                    {% else  %}    
+                                    <p>No creation steps available.</p>
+                                {% endif %}
+                          </ul>
+                          {% if user.is_authenticated %}
+                                {% if user.userprofile.preferred_language == 'hi' %}
+                                <h4 class="mb-3">आवेदन के लिए आवश्यक</h4>
+                                {% elif user.userprofile.preferred_language == 'mr' %}
+                                <h4 class="mb-3">अर्जासाठी आवश्यक</h4>
+                                {% else %}
+                                <h4 class="mb-3">Required For Application</h4>
+                                {% endif %}
+                                {% else %}
+                                <h4 class="mb-3">Required For Application</h4>
+                                {% endif %}
+                          <p> {{ document.required_for_application }}</p>
+                          <ul class="list-unstyled">
+                              <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
+                              <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
+                              <li><i class="fa fa-angle-right text-primary me-2"></i>Rebum vero dolores dolores elitr</li>
+                              <li><i class="fa fa-angle-right text-primary me-2"></i>Est voluptua et sanctus at sanctus erat</li>
+                              <li><i class="fa fa-angle-right text-primary me-2"></i>Diam diam stet erat no est est</li>
+                          </ul>
+                      </div>
+                  </div>
+      
+                  <div class="col-lg-4">
+                      <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                        {% if user.is_authenticated %}
+                            {% if user.userprofile.preferred_language == 'hi' %}
+                            <h4 class="mb-4">महत्वपूर्ण सारांश</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>श्रेणी: {{ document.category }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>पसंदीदा आयु:  {{ document.preferred_age }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>जारी करने वाली प्राधिकरण:  {{ document.issuing_authority }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>जाति: {{document.caste}}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>राज्य: {{document.state}}</p>
+                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date of Creation: {{ document.date_created }}</p>
+                            
+                            {% elif user.userprofile.preferred_language == 'mr' %}
+                            <h4 class="mb-4">महत्वाचा सारांश</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>वर्ग: {{ document.category }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>प्राधान्य देणारी वयोमर्यादा: {{ document.preferred_age }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>जारी करणारी प्राधिकरण:  {{ document.issuing_authority }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>जात: {{document.caste}}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>राज्य: {{document.state}}</p>
+                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>निर्माण की तिथि: {{ document.date_created }}</p>
+                            {% else %}
+                            <h4 class="mb-4">Important Summery</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Category: {{ document.category }}</p>
+                          <p><i class="fa fa-angle-right text-primary me-2"></i>Preferred Age:  {{ document.preferred_age }}</p>
+                          <p><i class="fa fa-angle-right text-primary me-2"></i>Issuing Authority:  {{ document.issuing_authority }}</p>
+                          <p><i class="fa fa-angle-right text-primary me-2"></i>Caste: {{document.caste}}</p>
+                          <p><i class="fa fa-angle-right text-primary me-2"></i>State: {{document.state}}</p>
+                          <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>निर्मितीची तारीख: {{ document.date_created }}</p>
+                      
+                            {% endif %}
+                            {% else %}
+                            <h4 class="mb-4">Important Summery</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Category: {{ document.category }}</p>
+                          <p><i class="fa fa-angle-right text-primary me-2"></i>Preferred Age:  {{ document.preferred_age }}</p>
+                          <p><i class="fa fa-angle-right text-primary me-2"></i>Issuing Authority:  {{ document.issuing_authority }}</p>
+                          <p><i class="fa fa-angle-right text-primary me-2"></i>Caste: {{document.caste}}</p>
+                          <p><i class="fa fa-angle-right text-primary me-2"></i>State: {{document.state}}</p>
+                          <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date of Creation: {{ document.date_created }}</p>
+                      
+                            {% endif %}
+                          </div>
+                      <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                        {% if user.is_authenticated %}
+                            {% if user.userprofile.preferred_language == 'hi' %}
+                            <h4 class="mb-4">योग्यता और आवश्यक दस्तावेज़</h4>
+                            {% elif user.userprofile.preferred_language == 'mr' %}
+                            <h4 class="mb-4">पात्रता आणि आवश्यक कागदपत्रे</h4>
+                            {% else %}
+                            <h4 class="mb-4">Qualification and Required Documents</h4>
+                            {% endif %}
+                            {% else %}
+                            <h4 class="mb-4">Qualification and Required Documents</h4>
+                            {% endif %}
+                          <p class="m-0">Ipsum dolor ipsum accusam stet et et diam dolores, sed rebum sadipscing elitr vero dolores. Lorem dolore elitr justo et no gubergren sadipscing, ipsum et takimata aliquyam et rebum est ipsum lorem diam. Et lorem magna eirmod est et et sanctus et, kasd clita labore.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Job Detail End -->
+
+{% endblock %}
+
+                <div>
+                    <p class="font-semibold text-sm mb-1">Required For Application</p>
+                    <p class="text-xs text-[#4a6ea9] leading-tight max-w-xl">
+                        {{ required_for_application }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-start mb-5 space-x-4">
+                <div class="flex-shrink-0 bg-[#e6ebf0] rounded-md p-3">
+                    <i class="fas fa-file-alt text-[#4a6ea9] text-lg"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-sm mb-1">Issuing Authority</p>
+                    <p class="text-xs text-[#4a6ea9] leading-tight max-w-xl">
+                        {{ issuing_authority }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-start mb-5 space-x-4">
+                <div class="flex-shrink-0 bg-[#e6ebf0] rounded-md p-3">
+                    <i class="fas fa-file-alt text-[#4a6ea9] text-lg"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-sm mb-1">Date of Creation</p>
+                    <p class="text-xs text-[#4a6ea9] leading-tight max-w-xl">
+                        {{ date_created }}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl">
+            <h3 class="font-bold text-lg mb-4">Download Forms and Guidelines</h3>
+
+            <div class="flex items-center justify-between mb-5 space-x-4 bg-[#e6ebf0] rounded-md p-3">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 bg-white rounded-md p-3">
+                        <i class="fas fa-file-alt text-[#4a6ea9] text-lg"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-sm mb-1">Birth Certificate Application Form</p>
+                        <p class="text-xs text-[#4a6ea9] leading-tight max-w-xl">
+                            Download the birth certificate application form for your state and follow the instructions provided. If you have questions, contact the vital records office in the state where the birth occurred.
+                        </p>
+                    </div>
+                </div>
+                <button class="bg-white border border-[#d6e0f0] rounded-md px-4 py-1 text-xs font-normal text-[#0a162c] hover:bg-[#f0f4f9]">
+                    Download
+                </button>
+            </div>
+
+            <div class="flex items-center justify-between space-x-4 bg-[#e6ebf0] rounded-md p-3">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 bg-white rounded-md p-3">
+                        <i class="fas fa-file-alt text-[#4a6ea9] text-lg"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-sm mb-1">Guidelines for Obtaining a Birth Certificate</p>
+                        <p class="text-xs text-[#4a6ea9] leading-tight max-w-xl">
+                            The guidelines for obtaining a birth certificate vary by state. Review the instructions provided with the application form to ensure you submit the required information and documentation.
+                        </p>
+                    </div>
+                </div>
+                <button class="bg-white border border-[#d6e0f0] rounded-md px-4 py-1 text-xs font-normal text-[#0a162c] hover:bg-[#f0f4f9]">
+                    Download
+                </button>
+            </div>
+        </section>
+    </div>
+</div>

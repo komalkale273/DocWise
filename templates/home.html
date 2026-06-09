@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- Carousel Start -->
+        <div class="container-fluid p-10">
+            <div class="owl-carousel header-carousel position-relative">
+                <div class="owl-carousel-item position-relative">
+                  <img class="img-fluid" src="{% static 'img/carousel-1.jpg' %}" alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-10 col-lg-8">
+                                    {% if user.is_authenticated %}
+                                    {% if user.userprofile.preferred_language == 'hi' %}
+                                    <h1 class="display-3 text-white animated slideInDown mb-4">आपके लिए सही योजनाएं तुरंत खोजें.</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">आपकी उम्र, आय, जाति, राज्य और पेशे के अनुसार उपयुक्त सरकारी योजनाएं और दस्तावेज़ एक ही स्थान पर पाएं।</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">योजना खोजें</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">दस्तावेज़ जानकारी खोजें</a>
+                                    
+                                    {% elif user.userprofile.preferred_language == 'mr' %}
+                                    <h1 class="display-3 text-white animated slideInDown mb-4">आपल्यासाठी योग्य योजना त्वरित शोधा.</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">आपल्या वय, उत्पन्न, जात, राज्य आणि व्यवसायानुसार योग्य सरकारी योजना आणि दस्तऐवज एकाच ठिकाणी शोधा.</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">योजना शोधा</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">कागदपत्राची माहिती शोधा</a>
+                                    {% else %}
+                                    <h1 class="display-3 text-white animated slideInDown mb-4">Discover the Right Schemes for You—Instantly.</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Find the right government schemes and documents tailored to your age, income, caste, state, and profession—all in one place.</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Scheme</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Document Info</a>
+                                      {% endif %}
+                                      {% else %}
+                                      <h1 class="display-3 text-white animated slideInDown mb-4">Discover the Right Schemes for You—Instantly.</h1>
+                                      <p class="fs-5 fw-medium text-white mb-4 pb-2">Find the right government schemes and documents tailored to your age, income, caste, state, and profession—all in one place.</p>
+                                      <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Scheme</a>
+                                      <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Document Info</a>
+                                      {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="owl-carousel-item position-relative">
+                    <img class="img-fluid" src="{% static 'img/carousel-2.jpg' %}" alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-10 col-lg-8">
+                                {% if user.is_authenticated %}
+                                    {% if user.userprofile.preferred_language == 'hi' %}
+                                    <h1 class="display-3 text-white animated slideInDown mb-4">हम आपको आपके योग्य योजनाओं से जोड़ते हैं।</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">हमारा प्लेटफ़ॉर्म आपकी उम्र, आय, जाति, पेशा और राज्य के आधार पर सरकारी योजनाएं और आवश्यक दस्तावेज़ खोजने में आपकी मदद करता है। आपको व्यक्तिगत सुझाव मिलते हैं और आप आसानी से और जल्दी उन लाभों से अपडेट रहते हैं जिनके आप पात्र हैं।</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">एक योजना खोजें</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">एक दस्तावेज़ जानकारी खोजें</a>
+
+                                    {% elif user.userprofile.preferred_language == 'mr' %}
+                                    <h1 class="display-3 text-white animated slideInDown mb-4">आम्ही तुम्हाला पात्र योजनांशी जुळवून देतो.</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">आमचा प्लॅटफॉर्म तुमच्या वय, उत्पन्न, जात, व्यवसाय आणि राज्याच्या आधारे सरकारी योजना आणि आवश्यक कागदपत्रे शोधण्यास मदत करतो. तुम्हाला वैयक्तिक सूचना मिळतात आणि तुम्ही पात्र असलेल्या नवीनतम लाभांबद्दल पटकन आणि सहज अपडेट राहता.</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">एक योजना शोधा</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">एक दस्तऐवज माहिती शोधा</a>
+                                    {% else %}
+                                    <h1 class="display-3 text-white animated slideInDown mb-4">We Match You with the Schemes You Deserve.</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Our platform helps you discover government schemes and required documents based on your age, income, caste, profession, and state. Get personalized suggestions and stay updated with the latest benefits you’re eligible for—quickly and easily.</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Scheme</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Document Info</a>
+                                    {% endif %}
+                                {% else %}
+                                <h1 class="display-3 text-white animated slideInDown mb-4">We Match You with the Schemes You Deserve.</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Our platform helps you discover government schemes and required documents based on your age, income, caste, profession, and state. Get personalized suggestions and stay updated with the latest benefits you’re eligible for—quickly and easily.</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Scheme</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Document Info</a>
+                                {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+
+                <!-- About Start -->
+                <div class="container-xxl py-5">
+                  <div class="container">
+                      <div class="row g-5 align-items-center">
+                          <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                              <div class="row g-0 about-bg rounded overflow-hidden">
+                                  <div class="col-6 text-start">
+                                      <img class="img-fluid w-100" src="{% static 'img/about-1.jpg' %}" alt="" style="width: 85%; margin-top: 15%;">
+                                  </div>
+                                  <div class="col-6 text-start">
+                                      <img class="img-fluid" src="{% static 'img/about-2.jpg' %}" alt="" style="width: 85%; margin-top: 15%;">
+                                  </div>
+                                  <div class="col-6 text-end">
+                                      <img class="img-fluid" src="{% static 'img/about-3.jpg' %}" alt="" style="width: 85%;">
+                                  </div>
+                                  <div class="col-6 text-end">
+                                      <img class="img-fluid w-100" src="{% static 'img/about-4.jpg' %}" alt="">
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                            {% if user.is_authenticated %}
+                              {% if user.userprofile.preferred_language == 'hi' %}
+                              <h1 class="mb-4">हम सबसे अच्छी योजना प्राप्त करने और दस्तावेज़ खोजने में आपकी मदद करते हैं।</h1>
+                              <p class="mb-4">अपने व्यक्तिगत विवरण जैसे आयु, आय, पेशा और स्थान के आधार पर आपके लिए सबसे उपयुक्त सरकारी योजनाओं को खोजें। व्यक्तिगत सुझाव प्राप्त करें, आवश्यक दस्तावेज़ आसानी से एक्सेस करें, और उन लाभों के बारे में सूचित रहें जिनके लिए आप पात्र हैं।</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>सही लाभ जल्दी से पाएं।</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>आसान तरीके से योजनाएं और दस्तावेज़ पाएं।</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>आपकी पात्रता, आपके लाभ, एक मंच।</p>
+                              <a class="btn btn-primary py-3 px-5 mt-3" href="">और पढ़ें</a>
+
+                              {% elif user.userprofile.preferred_language == 'mr' %}
+                              <h1 class="mb-4">आम्ही तुम्हाला सर्वोत्तम योजना मिळवण्यासाठी आणि दस्तऐवज शोधण्यासाठी मदत करतो.</h1>
+                              <p class="mb-4">तुमच्या वैयक्तिक माहितीवर आधारित, जसे की वय, उत्पन्न, व्यवसाय आणि स्थान, तुमच्यासाठी सर्वात योग्य सरकारी योजना शोधा. वैयक्तिकृत सूचना मिळवा, आवश्यक कागदपत्रे सहजपणे मिळवा, आणि तुम्हाला योग्य असलेल्या सर्व नवीन लाभांबद्दल माहिती मिळवा.</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>जल्दी आणि सोप्या पद्धतीने योग्य लाभ मिळवा.</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>आवश्यक योजना आणि कागदपत्रे सहज शोधा.</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>तुमची पात्रता, तुमचे लाभ, एकच मंच.</p>
+                              <a class="btn btn-primary py-3 px-5 mt-3" href="">अधिक वाचा</a>
+
+                              {% else %}
+                              <h1 class="mb-4">We Help To Get The Best Scheme And Find A Documents</h1>
+                              <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
+                              <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+                              {% endif %}
+                              
+                            {% else %}
+                              <h1 class="mb-4">We Help To Get The Best Scheme And Find A Documents</h1>
+                              <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
+                              <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
+                              <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+                            {% endif %}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- About End -->
+
+  {% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+        {% if user.userprofile.preferred_language == 'hi' %}
+        <h1>अनुशंसित योजनाएँ</h1>
+        {% elif user.userprofile.preferred_language == 'mr' %}
+        <h1>शिफारस केलेल्या योजना</h1>
+        {% else %}
+        <h1>Recommended Schemes</h1>
+        {% endif %}
+        {% else %}
+        <h1>Recommended Schemes</h1>
+        {% endif %}
+
+{% if schemes %}
+    <ul>
+        {% for scheme in schemes %}
+            <li>
+                <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; border-radius: 8px;">
+                    <h2>{{ scheme.title }}</h2>
+                    <p><strong>Description:</strong> {{ scheme.description }}</p>
+                    <p><strong>Income Limit:</strong> {{ scheme.income_limit }}</p>
+                    <p><strong>Age Limit:</strong> {{ scheme.age_limit }}</p>
+                    <p><strong>Caste:</strong> {{ scheme.caste }}</p>
+                    <p><strong>State:</strong> {{ scheme.state }}</p>
+                    <p><strong>Profession:</strong> {{ scheme.profession }}</p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p style="color: gray; font-style: italic;">No recommendations available based on your personal information.</p>
+{% endif %}
+{% endblock %}

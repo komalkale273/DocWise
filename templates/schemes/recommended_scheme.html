@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="bg-[#f7fafc] p-6 flex flex-col items-center min-h-screen mt-5">
+  
+  {% if user.is_authenticated %}
+        {% if user.userprofile.preferred_language == 'hi' %}
+        <h1
+    class="font-source-serif-pro font-bold text-[#0f172a] text-2xl mb-8 text-center"
+  >
+  अनुशंसित योजनाएँ
+  </h1>
+  {% elif user.userprofile.preferred_language == 'mr' %}
+  <h1
+class="font-source-serif-pro font-bold text-[#0f172a] text-2xl mb-8 text-center"
+>
+शिफारस केलेल्या योजना
+</h1>
+        {% else %}
+        <h1
+    class="font-source-serif-pro font-bold text-[#0f172a] text-2xl mb-8 text-center"
+  >
+  Recommended schemes
+  </h1>
+        {% endif %}
+        {% else %}
+        <h1
+    class="font-source-serif-pro font-bold text-[#0f172a] text-2xl mb-8 text-center"
+  >
+  Recommended schemes
+  </h1>
+        {% endif %}
+
+  {% if schemes %} {% for scheme in schemes %}
+  <div
+    class="max-w-4xl w-full bg-white rounded-lg shadow-md flex flex-col md:flex-row items-center md:items-start p-6 md:p-8 mb-4"
+  >
+    <div class="flex-1 max-w-md">
+      <h1
+        class="font-source-serif-pro font-semibold text-xl text-[#0f172a] mb-3"
+      >
+        {{ scheme.title }}
+      </h1>
+      <p class="text-[15px] text-[#64748b] mb-4 leading-tight">
+        {{ scheme.description }}
+      </p>
+      <button
+        type="button"
+        class="text-xs bg-[#e2e8f0] text-[#475569] rounded px-3 py-1.5 font-semibold"
+      >
+        Read more
+      </button>
+    </div>
+    <div
+      class="flex-shrink-0 rounded-md overflow-hidden ml-5 w-full max-w-[202px] h-36 md:h-40"
+    >
+      <img
+        src="https://cdn3.vectorstock.com/i/1000x1000/62/37/new-scheme-rubber-stamp-vector-16236237.jpg"
+        alt="Illustration of a baby stroller side view with blanket and toys in beige and brown tones"
+        class="w-full h-full object-cover rounded-md"
+      />
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <p>No recommended schemes found.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

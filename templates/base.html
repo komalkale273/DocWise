@@ -1,0 +1,378 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DocWise-Centerlized platfrom</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- Custom Premium Scrollbar -->
+    <style>
+      /* Webkit Browsers (Chrome, Safari, Edge, Opera) */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f8f9fa;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #00B074; /* Primary theme green */
+        border-radius: 10px;
+        border: 2px solid #f8f9fa;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #008f5d;
+      }
+
+      /* Firefox */
+      html {
+        scrollbar-width: thin;
+        scrollbar-color: #00B074 #f8f9fa;
+      }
+    </style>
+  </head>
+
+  <body style="margin: 0; padding: 0; background: #ffffff !important; width: 100% !important; max-width: 100% !important; min-width: 100% !important;">
+    <div class="container-fluid bg-white p-0" style="width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important;">
+      <!-- Navbar Start -->
+      <nav
+        class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0"
+      >
+        <a
+          href="index.html"
+          class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5"
+        >
+          <h1 class="m-0 text-primary">DocWise</h1>
+        </a>
+        <button
+          type="button"
+          class="navbar-toggler me-4"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav ms-auto p-4 p-lg-0">
+          {% if user.is_authenticated %}
+            {% if user.userprofile.preferred_language == 'hi' %}
+                <a href="{% url 'home' %}" class="nav-item nav-link active">होम</a>
+                <a href="{% url 'scheme_list' %}" class="nav-item nav-link">सभी योजनाएं</a>
+                <a href="{% url 'documents' %}" class="nav-item nav-link">सभी दस्तावेज़</a>
+                <a href="{% url 'recommended_schemes' %}" class="nav-item nav-link">अनुशंसित योजनाएं</a>
+                <a href="{% url 'center_list' %}" class="nav-item nav-link">सेवा केंद्र</a>
+                <a href="{% url 'notifications' %}" class="nav-item nav-link position-relative">
+                    सूचनाएं
+                    {% if unread_notifications_count > 0 %}
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                        {{ unread_notifications_count }}
+                    </span>
+                    {% endif %}
+                </a>
+            {% elif user.userprofile.preferred_language == 'mr' %}
+                <a href="{% url 'home' %}" class="nav-item nav-link active">मुख्यपृष्ठ</a>
+                <a href="{% url 'scheme_list' %}" class="nav-item nav-link">सर्व योजना</a>
+                <a href="{% url 'documents' %}" class="nav-item nav-link">सर्व कागदपत्रे</a>
+                <a href="{% url 'recommended_schemes' %}" class="nav-item nav-link">शिफारस केलेल्या योजना</a>
+                <a href="{% url 'center_list' %}" class="nav-item nav-link">सेवा केंद्र</a>
+                <a href="{% url 'notifications' %}" class="nav-item nav-link position-relative">
+                    सूचना
+                    {% if unread_notifications_count > 0 %}
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                        {{ unread_notifications_count }}
+                    </span>
+                    {% endif %}
+                </a>
+            {% else %}
+                <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+                <a href="{% url 'scheme_list' %}" class="nav-item nav-link">All Schemes</a>
+                <a href="{% url 'documents' %}" class="nav-item nav-link">All Documents</a>
+                <a href="{% url 'recommended_schemes' %}" class="nav-item nav-link">Recommended Schemes</a>
+                <a href="{% url 'center_list' %}" class="nav-item nav-link">Service Centers</a>
+                <a href="{% url 'notifications' %}" class="nav-item nav-link position-relative">
+                    Notifications
+                    {% if unread_notifications_count > 0 %}
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                        {{ unread_notifications_count }}
+                    </span>
+                    {% endif %}
+                </a>
+            {% endif %}
+          {% else %}
+            <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+            <a href="{% url 'scheme_list' %}" class="nav-item nav-link">All Schemes</a>
+            <a href="{% url 'documents' %}" class="nav-item nav-link">All Documents</a>
+            <a href="{% url 'center_list' %}" class="nav-item nav-link">Service Centers</a>
+          {% endif %}
+            
+        
+
+            <div class="nav-item dropdown">
+              {% if user.is_authenticated %}
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  id="languageDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-globe-americas me-1"></i>
+                  {% if user.userprofile.preferred_language %}
+                    {{ user.userprofile.preferred_language|upper }}
+                  {% else %}
+                    ENG
+                  {% endif %}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="selectLanguage('en')">English</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="selectLanguage('hi')">Hindi</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="selectLanguage('mr')">Marathi</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="selectLanguage('gu')">Gujarati</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="selectLanguage('ta')">Tamil</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="selectLanguage('te')">Telugu</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="selectLanguage('bn')">Bengali</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="selectLanguage('kn')">Kannada</a>
+                  </li>
+                </ul>
+            
+                <form method="POST" action="{% url 'change_language' %}" id="language-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="language" id="language-input" />
+                </form>
+              {% endif %}
+            </div>
+            
+            <!-- JS to submit language change -->
+            <script>
+              function selectLanguage(lang) {
+                document.getElementById("language-input").value = lang;
+                document.getElementById("language-form").submit();
+              }
+            </script>
+            
+          </div>
+          {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}">
+            <button
+              class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block"
+            >
+              Logout
+            </button>
+          </a>
+          {% else %}
+          <a href="{% url 'login' %}">
+            <button
+              class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block"
+            >
+              Login<i class="fa fa-arrow-right ms-3"></i>
+            </button>
+          </a>
+          {% endif %}
+          <!-- <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a> -->
+        </div>
+      </nav>
+      <!-- Navbar End -->
+      <main>{% block content %} {% endblock %}</main>
+
+      <!-- Footer Start -->
+      <div
+        class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn"
+        data-wow-delay="0.1s"
+      >
+        <div class="container py-5">
+          {% if user.is_authenticated and user.userprofile.preferred_language == 'hi' %}
+          <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-white mb-4">डॉकवाइज</h5>
+                <p class="mb-4">भारतीय नागरिकों को उनके जीवन के विभिन्न चरणों में आवश्यक सरकारी दस्तावेजों और कल्याणकारी योजनाओं को समझने और प्रबंधित करने में मदद करने वाला एआई-संचालित मार्गदर्शन पोर्टल।</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-white mb-4">त्वरित लिंक</h5>
+                <a class="btn btn-link text-white-50" href="{% url 'home' %}">होम</a>
+                <a class="btn btn-link text-white-50" href="{% url 'scheme_list' %}">सभी योजनाएं</a>
+                <a class="btn btn-link text-white-50" href="{% url 'documents' %}">सभी दस्तावेज़</a>
+                <a class="btn btn-link text-white-50" href="{% url 'center_list' %}">सेवा केंद्र</a>
+                <a class="btn btn-link text-white-50" href="{% url 'about' %}">हमारे बारे में</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-white mb-4">विकासकर्ता टीम</h5>
+                <p class="small mb-1">शासकीय अभियांत्रिकी महाविद्यालय, अमरावती के अंतिम वर्ष के आईटी विभाग के छात्रों द्वारा विकसित।</p>
+                <p class="small text-white mb-0">मार्गदर्शक: प्रो. अर्चना भाड़े (विभागाध्यक्ष, आईटी विभाग)</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-white mb-4">संपर्क</h5>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>शासकीय अभियांत्रिकी महाविद्यालय, अमरावती, महाराष्ट्र 444604</p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+0721-2531930</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@docwise.gov.in</p>
+            </div>
+          </div>
+          {% elif user.is_authenticated and user.userprofile.preferred_language == 'mr' %}
+          <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-white mb-4">डॉकवाईज</h5>
+                <p class="mb-4">भारतीय नागरिकांना त्यांच्या आयुष्यातील विविध टप्प्यांवर आवश्यक सरकारी कागदपत्रे आणि कल्याणकारी योजना समजून घेण्यासाठी आणि व्यवस्थापित करण्यासाठी मदत करणारे एआय-चालित मार्गदर्शन पोर्टल.</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-white mb-4">त्वरित दुवे</h5>
+                <a class="btn btn-link text-white-50" href="{% url 'home' %}">मुख्यपृष्ठ</a>
+                <a class="btn btn-link text-white-50" href="{% url 'scheme_list' %}">सर्व योजना</a>
+                <a class="btn btn-link text-white-50" href="{% url 'documents' %}">सर्व कागदपत्रे</a>
+                <a class="btn btn-link text-white-50" href="{% url 'center_list' %}">सेवा केंद्र</a>
+                <a class="btn btn-link text-white-50" href="{% url 'about' %}">आमच्याबद्दल</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-white mb-4">विकासक संघ</h5>
+                <p class="small mb-1">शासकीय अभियांत्रिकी महाविद्यालय, अमरावती येथील माहिती तंत्रज्ञान विभागाच्या अंतिम वर्षाच्या विद्यार्थ्यांनी विकसित केले.</p>
+                <p class="small text-white mb-0">मार्गदर्शक: प्रा. अर्चना भाडे (आयटी विभाग प्रमुख)</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-white mb-4">संपर्क</h5>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>शासकीय अभियांत्रिकी महाविद्यालय, अमरावती, महाराष्ट्र ४४४६०४</p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+0721-2531930</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@docwise.gov.in</p>
+            </div>
+          </div>
+          {% else %}
+          <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+              <h5 class="text-white mb-4">DocWise</h5>
+              <p class="mb-4">An AI-powered guidance portal built to help Indian citizens understand and manage essential government documents and welfare schemes at various life stages.</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <h5 class="text-white mb-4">Quick Links</h5>
+              <a class="btn btn-link text-white-50" href="{% url 'home' %}">Home</a>
+              <a class="btn btn-link text-white-50" href="{% url 'scheme_list' %}">All Schemes</a>
+              <a class="btn btn-link text-white-50" href="{% url 'documents' %}">All Documents</a>
+              <a class="btn btn-link text-white-50" href="{% url 'center_list' %}">Service Centers</a>
+              <a class="btn btn-link text-white-50" href="{% url 'about' %}">About Us</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <h5 class="text-white mb-4">Developer Credits</h5>
+              <p class="small mb-1">Developed by the final year Information Technology team from Government College of Engineering, Amravati.</p>
+              <p class="small text-white mb-0">Project Guide: Prof. Archana Bhade (HOD, IT Department)</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <h5 class="text-white mb-4">Contact</h5>
+              <p class="mb-2">
+                <i class="fa fa-map-marker-alt me-3"></i>Govt. College of Engineering, VMV Road, Amravati, MH 444604
+              </p>
+              <p class="mb-2">
+                <i class="fa fa-phone-alt me-3"></i>+0721-2531930
+              </p>
+              <p class="mb-2">
+                <i class="fa fa-envelope me-3"></i>info@docwise.gov.in
+              </p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="container">
+          <div class="copyright">
+            <div class="row">
+              <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                &copy; <a class="border-bottom text-white" href="{% url 'home' %}">DocWise</a>, All Right Reserved.
+                Developed by GCOE Amravati Team.
+              </div>
+              <div class="col-md-6 text-center text-md-end">
+                <div class="footer-menu">
+                  <a href="{% url 'home' %}">Home</a>
+                  <a href="{% url 'about' %}">About Us</a>
+                  <a href="#">Help</a>
+                  <a href="#">FAQs</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer End -->
+
+      <!-- Back to Top -->
+      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+        ><i class="bi bi-arrow-up"></i
+      ></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+      // Function to toggle the language menu visibility
+      function toggleLanguageMenu() {
+        const menu = document.getElementById("language-menu");
+        menu.classList.toggle("hidden"); // Toggle visibility by adding/removing 'hidden'
+
+        // Toggle the 'aria-expanded' attribute
+        const button = document.getElementById("language-btn");
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", !isExpanded);
+      }
+
+      // Function to select a language
+      function selectLanguage(language) {
+        // Set the selected language in the input field
+        document.getElementById("language-input").value = language;
+
+        // Submit the form to change the language
+        document.getElementById("language-form").submit();
+      }
+    </script>
+  </body>
+</html>

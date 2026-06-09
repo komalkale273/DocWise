@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Header End -->
+<div class="container-xxl py-3 bg-dark page-header">
+  <div class="container my-2 pt-2 pb-2">
+    {% if user.is_authenticated %}
+        {% if user.userprofile.preferred_language == 'hi' %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">दस्तावेज़</h1>
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb text-uppercase">
+              <li class="breadcrumb-item"><a href="#">मुख्य पृष्ठ</a></li>
+              <li class="breadcrumb-item text-white active" aria-current="page">सभी दस्तावेज़</li>
+          </ol>
+      </nav>
+        {% elif user.userprofile.preferred_language == 'mr' %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">कागदपत्रे</h1>
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb text-uppercase">
+              <li class="breadcrumb-item"><a href="#">मुख्यपृष्ठ</a></li>
+              <li class="breadcrumb-item text-white active" aria-current="page">सर्व कागदपत्रे</li>
+          </ol>
+      </nav>
+        {% else %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Documents</h1>
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb text-uppercase">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item text-white active" aria-current="page">All Documents</li>
+          </ol>
+      </nav>
+        {% endif %}
+        {% else %}
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Documents</h1>
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb text-uppercase">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item text-white active" aria-current="page">All Documents</li>
+          </ol>
+      </nav>
+        {% endif %}
+      
+  </div>
+</div>
+<!-- Header End -->
+
+       <!-- Schemes Start -->
+       <div class="container-xxl py-5">
+        <div class="container">
+          {% if user.is_authenticated %}
+            {% if user.userprofile.preferred_language == 'hi' %}
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">सभी दस्तावेज़</h1>
+            {% elif user.userprofile.preferred_language == 'mr' %}
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">सर्व कागदपत्रे</h1>
+            {% else %}
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Documents</h1>
+            {% endif %}
+            {% else %}
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Documents</h1>
+            {% endif %}
+            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+              
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <!-- Scheme Listings -->
+                      {% if documents %}
+                      {% for document in documents %}
+                        <div class="job-item p-4 mb-4">
+                            <div class="row g-4">
+                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid border rounded" src="" alt="" style="width: 80px; height: 80px;">
+                                    <div class="text-start ps-4">
+                                        <h5 class="mb-3">{{ document.title }}</h5>
+                                        <span class="text-truncate me-0"> {{ document.description|truncatewords:10 }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                    <div class="d-flex mb-3">
+                                        <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                        <a class="btn btn-primary" href="{% url 'document_detail' document.id %}">Read More</a>
+                                    </div>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Deadline: {{ scheme.deadline|date:"d M Y" }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <h1>No Documents</h1>
+
+                        {% endif %}
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Schemes End -->
+
+
+{% endblock %}
+
+
+
+
+<div class="bg-[#f7fafc] p-6 flex flex-col items-center min-h-screen">
+  <h1 class="font-source-serif-pro font-bold text-[#0f172a] text-2xl mb-8 text-center">
+    Documents
+  </h1>
+
+  {% if documents %}
+    {% for document in documents %}
+      <div class="max-w-4xl w-full bg-white rounded-lg shadow-md flex flex-col md:flex-row items-center md:items-start p-6 md:p-8 mb-4">
+        
+        <!-- Document Info Section -->
+        <div class="flex-1 max-w-md mb-4 md:mb-0">
+          <h1 class="font-source-serif-pro font-semibold text-xl text-[#0f172a] mb-3">
+            {{ document.title }}
+          </h1>
+          <p class="text-[15px] text-[#64748b] mb-4 leading-tight">
+            {{ document.description|truncatewords:20 }}  <!-- Truncate description to 20 words -->
+          </p>
+          <button type="button" class="text-xs bg-[#e2e8f0] text-[#475569] rounded px-3 py-1.5 font-semibold hover:bg-[#cbd5e0]">
+            <a href="{% url 'document_detail' document.id %}">Read More</a>
+          </button>
+        </div>
+        
+        <!-- Document Image Section -->
+        <div class="flex-shrink-0 rounded-md overflow-hidden ml-5 w-full max-w-[202px] h-36 md:h-40">
+          {% if document.image %}
+            <img
+              src="{{ document.image.url }}"
+              alt="{{ document.title }} image"
+              class="w-full h-full object-cover rounded-md"
+            />
+          {% else %}
+            <img
+              src="https://cdn3.vectorstock.com/i/1000x1000/62/37/new-scheme-rubber-stamp-vector-16236237.jpg"
+              alt="Default document image"
+              class="w-full h-full object-cover rounded-md"
+            />
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No recommended documents found.</p>
+  {% endif %}
+</div>

@@ -1,0 +1,43 @@
+# Python Cache and Compiled Files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+bin/
+lib/
+include/
+pip-selfcheck.json
+
+# Environment Variables and Credentials
+.env
+*.env
+
+# Local Databases and Media
+db.sqlite3
+db.sqlite3-journal
+
+# Django collected static files
+staticfiles/
+
+# Logs
+*.log
+logs/
+
+# IDE / Text Editor Configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.gemini/
+
+# OS Specific Files
+.DS_Store
+Thumbs.db
