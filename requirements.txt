@@ -17,3 +17,4 @@ tzdata==2026.2
 urllib3==2.7.0
 gunicorn==26.0.0
 packaging==26.2
+whitenoise==6.12.0
